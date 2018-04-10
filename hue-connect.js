@@ -7,8 +7,7 @@ var hue = require('node-hue-api'),
 // configure hue stuff
 var HueApi = hue.HueApi,
 		lightState = hue.lightState,
-		username = config.username,
-		state = lightState.create();
+		username = config.username;
 
 
 ///// promises for finding hue bridge on your current network
