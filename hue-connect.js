@@ -1,7 +1,11 @@
+/******
+**** Hue bridge finding and connection module
+******/
+
 ///// Imports and such
 var hue = require('node-hue-api'),
-		config = require('./config/config'), 
-		request = require('request');
+		request = require('request'),
+		config = require('./config/config');
 
 
 // configure hue stuff
