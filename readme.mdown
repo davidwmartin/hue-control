@@ -1,0 +1,22 @@
+# Hue Utilities
+
+Couple simple hue utils based off node-hue-api package
+
+**hue-connect.js**
+
+Searches network for a hue bridge, creates an api object with that and your user credentials.
+
+**lights.js**
+
+Script for activating certain scenes by keyword via the command line
+
+
+## Notes
+
+Very simple at the moment. 
+
+Requres a file: config/config.js -- this should export a config object like so: 
+ 
+	module.exports = {
+		username: <your_hue_username>
+	} 
