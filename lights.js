@@ -1,7 +1,8 @@
 // requires
 var fs = require('fs'), 
 		hue = require('node-hue-api'),
-		config = require('./config/config.js')
+		config = require('./config/config.js'),
+		connect = require('./hue-connect.js')
 		;
 
 // define some vars
@@ -14,24 +15,16 @@ var HueApi = hue.HueApi,
 
 // get command type from bash command, parse
 var commandType = process.argv[2];
-lightChange(commandType);
 
+// connect to bridge (via hue-connect.js -- exports a promise that resolves with a node-hue-api api object)
+connect().then(function(data){
+	
+	var api = data;
+	changeLights(commandType, api);
 
-function lightChange(commandType) {
-
-	// returns array of bridges
-	hue.nupnpSearch()
-		.then(function(bridges){
-
-			// choose the first one
-			hostname = bridges[0].ipaddress;
-			api = new HueApi(hostname, username);
-			// send change lights command
-			changeLights(commandType, api);
-		})
-		.done();
-
-}
+	} ,function(err){
+		console.error(err);
+});
 
 
 // parses command, changes lights
