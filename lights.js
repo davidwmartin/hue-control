@@ -56,18 +56,18 @@ function changeLights(commandType, api){
 			break;
 
 		case 'day':
-			sceneId = '7zvcIvzkvl2IBu-';
+			sceneId = 'SzTWcta-JSvvPj1';
 			break;
 
 		case 'afternoon':
-			sceneId = 'SzTWcta-JSvvPj1';
+			sceneId = 'nPzFJn-u6d-vkbU';
 			break;
 
 		case 'evening':
 			sceneId = 'cY8fTLp2Ev3oozI';
 			break;
 
-		case 'cray':
+		case 'weird':
 			sceneId = 'PVB-BYTBE2OzN7j';
 			break;
 
