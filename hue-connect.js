@@ -43,7 +43,6 @@ let manualFind = new Promise(function(resolve, reject) {
 // attempts to find bridges automatically, falls back to manual hue-api request if that fails, returns api object (this function is exported below)
 function bridgeConnect(){
 	var hostname, api;
-
 	return autoFind
 		.then(function(autoData){
 			hostname = autoData[0].ipaddress;

@@ -67,8 +67,18 @@ function changeLights(commandType, api){
 			sceneId = 'cY8fTLp2Ev3oozI';
 			break;
 
+		case 'cray': 
 		case 'weird':
 			sceneId = 'PVB-BYTBE2OzN7j';
+			break;
+
+		case 'outrun':
+			sceneId = 'av6fwtnAEcgSozn';
+			break;
+
+		case 'forest':
+		case 'enchanted':
+			sceneId = '89SvYOY8ZjN9wx0';
 			break;
 
 		default:
