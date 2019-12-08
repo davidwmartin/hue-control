@@ -2,7 +2,9 @@
 var fs = require('fs'), 
 		hue = require('node-hue-api'),
 		config = require('./config/config.js'),
-		connect = require('./hue-connect.js')
+		connect = require('./hue-connect.js'),
+		getSunData = require('./get-sundata'),
+		sceneTimes = require('./config/scene-times.js')
 		;
 
 // define some vars
@@ -28,13 +30,13 @@ connect().then(function(data){
 
 
 // parses command, changes lights
-function changeLights(commandType, api){
+async function changeLights(commandType, api){
 
 	var sceneId;
 
 	switch (commandType){
 		case 'on':
-			sceneId = '44vKzz9DvQNo46l';
+			sceneId = await getSceneByTime();
 			break;
 
 		case 'off':
@@ -89,6 +91,28 @@ function changeLights(commandType, api){
 	api.activateScene(sceneId)
 		.then(displayResult(commandType))
 		.done();
+}
+
+// gets sunset time, compares against current time and selects a scene from config object based on offsets defined therein
+async function getSceneByTime() {
+	var now = new Date();
+
+	var sunset;
+	var desiredSceneId;
+
+	await getSunData().then(function(result){
+		sunset = new Date(result.sunset);
+	});
+
+	var sunsetOffset = (now - sunset) / 1000 / 60; // convert to minutes
+	// console.log(sceneTimes);
+	for (var i = sceneTimes.length - 1; i >= 0; i--) {
+		if (sceneTimes[i].offset < sunsetOffset) {
+			desiredSceneId = sceneTimes[i].scene;
+			break;
+		}
+	}
+	return desiredSceneId;
 }
 
 
