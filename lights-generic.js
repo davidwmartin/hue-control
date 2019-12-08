@@ -2,7 +2,7 @@
 var fs = require('fs'), 
 		hue = require('node-hue-api'),
 		config = require('./config/config.js'),
-		connect = require('./hue-connect.js')
+		connect = require('./lib/hue-connect.js')
 		;
 
 // define some vars
