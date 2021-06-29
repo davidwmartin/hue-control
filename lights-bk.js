@@ -1,16 +1,18 @@
 // requires
 var fs = require('fs'), 
-		hue = require('node-hue-api').v3,
+		hue = require('node-hue-api'),
 		config = require('./config/config.js'),
 		connect = require('./lib/hue-connect.js'),
 		getSceneByTime = require('./lib/get-scene-by-time.js')
 		;
 
 // define some vars
-var lightState = hue.lightStates.LightState,
+var HueApi = hue.HueApi,
+		lightState = hue.lightState,
 		hostname,
 		username = config.username,
-		state = new lightState();
+		state = lightState.create();
+
 
 // get command type from bash command, parse
 var commandType = process.argv[2];
@@ -84,7 +86,9 @@ async function changeLights(commandType, api){
 			return;
 	}
 
-	api.scenes.activateScene(sceneId);
+	api.activateScene(sceneId)
+		.then(displayResult(commandType))
+		.done();
 }
 
 // util function to print result to console
