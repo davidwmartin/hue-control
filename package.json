@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "crontab": "^1.4.2",
-    "node-hue-api": "^4.0.10"
+    "node-hue-api": "^4.0.11"
   }
 }
